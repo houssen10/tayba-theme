@@ -309,8 +309,131 @@ body, [data-theme="light"], .page-container, .main-section {
 }
 
 /* --------------------------------------------------------------------------
-   3. PRINT FORMAT BAR (PRINT PREVIEW INNER SIDEBAR)
-   FIXED HIGH-VISIBILITY TEXT, LABELS & CHECKBOXES
+   3. RIGHT SIDEBAR (FORM VIEW: ASSIGN, ATTACHMENTS, TAGS, SHARE, METADATA)
+   CRISP, HIGH-VISIBILITY CONTRAST (FIXES DIM/UNCLEAR RIGHT SIDEBAR)
+   -------------------------------------------------------------------------- */
+.form-sidebar,
+.layout-side-section .form-sidebar,
+.layout-main .layout-side-section .form-sidebar {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    color: #f1f5f9 !important;
+    padding: 16px 14px !important;
+}
+
+/* Document Title & Reference ("Abdiwelli", "INV/26/11/023") */
+.form-sidebar .title,
+.form-sidebar .document-name,
+.form-sidebar .document-label,
+.form-sidebar h6,
+.form-sidebar .h6 {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    display: block !important;
+}
+
+.form-sidebar .text-muted.ellipsis,
+.form-sidebar .document-name,
+.form-sidebar .sub-title {
+    color: #38bdf8 !important; /* Sky blue document reference */
+    font-weight: 600 !important;
+    font-size: 13px !important;
+}
+
+/* Action links ("Assign", "Attachments", "Tags", "Share") */
+.form-sidebar .form-sidebar-items,
+.form-sidebar .sidebar-section {
+    border-top: 1px solid #334155 !important;
+    padding-top: 12px !important;
+    margin-top: 12px !important;
+}
+
+.form-sidebar .form-sidebar-items:first-child,
+.form-sidebar .sidebar-section:first-child {
+    border-top: none !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.form-sidebar a,
+.form-sidebar .sidebar-item-label,
+.form-sidebar .form-sidebar-item,
+.form-sidebar .sidebar-action,
+.form-sidebar .add-assignment,
+.form-sidebar .add-attachment,
+.form-sidebar .add-tag,
+.form-sidebar .add-share {
+    color: #f1f5f9 !important; /* Crisp pure white / slate-50 */
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    transition: color 0.15s ease !important;
+}
+
+.form-sidebar a:hover,
+.form-sidebar .form-sidebar-item:hover,
+.form-sidebar .sidebar-action:hover {
+    color: #38bdf8 !important;
+}
+
+/* Icons & Plus signs in right sidebar */
+.form-sidebar svg,
+.form-sidebar .icon,
+.form-sidebar .sidebar-item-icon,
+.form-sidebar .octicon-plus,
+.form-sidebar .es-icon {
+    color: #38bdf8 !important;
+    stroke: #38bdf8 !important;
+}
+
+/* Attachment Pill ("INV039434.pdf") */
+.form-sidebar .attachment-row,
+.form-sidebar .attachments-list .attachment-row,
+.form-sidebar .form-attachments .attachment-row {
+    background-color: #334155 !important;
+    border: 1px solid #475569 !important;
+    border-radius: 6px !important;
+    padding: 6px 10px !important;
+    margin: 6px 0 !important;
+    color: #f1f5f9 !important;
+}
+
+.form-sidebar .attachment-row a,
+.form-sidebar .attachment-filename {
+    color: #38bdf8 !important;
+    font-weight: 600 !important;
+    font-size: 12.5px !important;
+}
+
+.form-sidebar .attachment-row .close,
+.form-sidebar .attachment-row .remove-btn {
+    color: #94a3b8 !important;
+    opacity: 0.8 !important;
+}
+
+.form-sidebar .attachment-row .close:hover {
+    color: #ef4444 !important;
+}
+
+/* Metadata at bottom ("Last Edited By Tabitha Contracts", "3 hours ago") */
+.form-sidebar .text-muted,
+.form-sidebar .created-by,
+.form-sidebar .modified-by,
+.form-sidebar .comment-count {
+    color: #94a3b8 !important; /* Legible muted slate */
+    font-size: 12px !important;
+}
+
+.form-sidebar .created-by strong,
+.form-sidebar .modified-by strong,
+.form-sidebar .user-name {
+    color: #ffffff !important; /* Crisp white for user names */
+    font-weight: 700 !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. PRINT FORMAT BAR (PRINT PREVIEW INNER SIDEBAR)
+   HIGH-VISIBILITY TEXT, LABELS & CHECKBOXES
    -------------------------------------------------------------------------- */
 /* Print Format Bar Container */
 .print-preview-sidebar,
@@ -432,7 +555,7 @@ body, [data-theme="light"], .page-container, .main-section {
 }
 
 /* --------------------------------------------------------------------------
-   4. FORM SECTIONS, TABS & INPUT FIELDS (HIGH CONTRAST & VISIBILITY)
+   5. FORM SECTIONS, TABS & INPUT FIELDS (HIGH CONTRAST & VISIBILITY)
    -------------------------------------------------------------------------- */
 /* Form Tabs Navigation Bar ("Details", "ETR Data", "eTIMS Details", etc.) */
 .form-tabs-list,
@@ -509,7 +632,7 @@ body, [data-theme="light"], .page-container, .main-section {
     padding-left: 12px !important;
 }
 
-/* Form Labels & Required Indicators */
+/* Form Labels */
 .form-group label,
 .control-label,
 .frappe-control .control-label {
@@ -519,8 +642,12 @@ body, [data-theme="light"], .page-container, .main-section {
     margin-bottom: 4px !important;
 }
 
-.reqd {
-    color: #ef4444 !important; /* High-contrast red asterisk */
+/* REQUIRED INDICATOR: Target ONLY the asterisk character, NEVER entire table cells/columns */
+span.reqd,
+label > span.reqd,
+.control-label > span.reqd,
+.grid-heading-row span.reqd {
+    color: #ef4444 !important; /* Red only for the '*' symbol */
     font-weight: 800 !important;
 }
 
@@ -561,19 +688,24 @@ body, [data-theme="light"], .page-container, .main-section {
     cursor: pointer !important;
 }
 
+/* --------------------------------------------------------------------------
+   6. CHILD TABLE / ITEMS GRID (CLEAN PROFESSIONAL STYLING - NO RED NUMBERS)
+   -------------------------------------------------------------------------- */
 /* Child Table Headers (e.g. Items grid in Sales / Purchase Invoice) */
 .grid-heading-row,
 .form-grid .grid-header-row,
 .grid-header {
     background-color: #f1f5f9 !important;
-    color: #0f172a !important;
-    font-weight: 700 !important;
     border-bottom: 2px solid #cbd5e1 !important;
     border-radius: 6px 6px 0 0 !important;
 }
 
+/* Column Header text: Clean bold dark slate (NOT red) */
 .grid-heading-row .grid-static-col,
-.form-grid .grid-header-row .grid-static-col {
+.grid-heading-row .grid-static-col.reqd,
+.form-grid .grid-header-row .grid-static-col,
+.form-grid .grid-header-row .grid-static-col.reqd,
+.grid-heading-row .static-area {
     color: #0f172a !important;
     font-weight: 700 !important;
     font-size: 12px !important;
@@ -581,8 +713,38 @@ body, [data-theme="light"], .page-container, .main-section {
     letter-spacing: 0.03em !important;
 }
 
+/* Table Row Cells: Clean, sharp dark slate for all values (rates, amounts, quantities) */
+.grid-static-col,
+.grid-static-col.reqd,
+.form-grid .grid-body .grid-row .grid-static-col,
+.form-grid .grid-body .grid-row .grid-static-col.reqd,
+.form-grid .grid-body .grid-row .grid-static-col .field-value,
+.grid-static-col[data-fieldname="rate"],
+.grid-static-col[data-fieldname="amount"],
+.grid-static-col[data-fieldname="custom_billing_rate"],
+.grid-static-col[data-fieldname="qty"],
+.grid-static-col[data-fieldname="custom_actual_kg"],
+.grid-static-col[data-fieldname="custom_pieces"] {
+    color: #0f172a !important; /* Professional deep slate replaces the jarring red text */
+    font-weight: 600 !important;
+}
+
+/* Highlight rates & amounts with high-contrast, professional deep slate */
+.grid-static-col[data-fieldname="rate"] .field-value,
+.grid-static-col[data-fieldname="amount"] .field-value,
+.grid-static-col[data-fieldname="rate"],
+.grid-static-col[data-fieldname="amount"] {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+/* Row hover effect */
+.form-grid .grid-body .grid-row:hover {
+    background-color: #f8fafc !important;
+}
+
 /* --------------------------------------------------------------------------
-   5. TOP NAVBAR
+   7. TOP NAVBAR
    -------------------------------------------------------------------------- */
 .navbar.navbar-default,
 .navbar {
@@ -605,7 +767,7 @@ body, [data-theme="light"], .page-container, .main-section {
 }
 
 /* --------------------------------------------------------------------------
-   6. PAGE HEADERS & BREADCRUMBS
+   8. PAGE HEADERS & BREADCRUMBS
    -------------------------------------------------------------------------- */
 .page-head {
     background-color: #ffffff !important;
@@ -633,7 +795,7 @@ body, [data-theme="light"], .page-container, .main-section {
 }
 
 /* --------------------------------------------------------------------------
-   7. WORKSPACE CARDS, CHARTS & METRICS
+   9. WORKSPACE CARDS, CHARTS & METRICS
    -------------------------------------------------------------------------- */
 .dashboard-widget-box,
 .new-chart-widget {
@@ -716,7 +878,7 @@ body, [data-theme="light"], .page-container, .main-section {
 }
 
 /* --------------------------------------------------------------------------
-   8. BUTTONS & UI CONTROLS
+   10. BUTTONS & UI CONTROLS
    -------------------------------------------------------------------------- */
 .btn-primary {
     background-color: #0284c7 !important;
