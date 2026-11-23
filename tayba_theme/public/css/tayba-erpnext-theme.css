@@ -33,20 +33,22 @@ body, [data-theme="light"], .page-container, .main-section {
 }
 
 /* --------------------------------------------------------------------------
-   2. HIGH-VISIBILITY MEDIUM-DARK SLATE DESK SIDEBAR (LEFT SIDEBAR)
+   2. HIGH-VISIBILITY MEDIUM-DARK SLATE SIDEBAR (SLATE-800)
+   PRESERVED ORIGINAL LEFT SIDEBAR STYLING - DO NOT ALTER
    -------------------------------------------------------------------------- */
-/* Main Desk Navigation Sidebar */
+/* Main Sidebar Container */
+.layout-side-section,
 .desk-sidebar,
 .body-sidebar-container,
 .body-sidebar-container .body-sidebar,
 .body-sidebar {
     background-color: #1e293b !important;
     background: #1e293b !important;
-    border-right: 2px solid #0f172a !important;
+    border-right: 1px solid #334155 !important;
     box-shadow: 3px 0 12px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* Top Module Header (e.g. "Buying ERPNext" / "Selling ERPNext") */
+/* Top Module Header (e.g. "Buying ERPNext") */
 .body-sidebar .sidebar-header,
 .desk-sidebar .sidebar-header,
 .module-sidebar-nav {
@@ -163,7 +165,7 @@ body, [data-theme="light"], .page-container, .main-section {
     transition: all 0.15s ease !important;
 }
 
-/* Sidebar Dropdown Chevron (for collapsible categories like "Setup", "POS") */
+/* Sidebar Dropdown Chevron (for collapsible categories like "Setup") */
 .body-sidebar .standard-sidebar-item .sidebar-item-control .drop-icon,
 .body-sidebar .drop-icon svg,
 .body-sidebar .drop-icon use {
@@ -171,7 +173,7 @@ body, [data-theme="light"], .page-container, .main-section {
     stroke: #94a3b8 !important;
 }
 
-/* Category & Section Headers ("SETUP", "REPORTS", "POS", "ITEMS & PRICING") */
+/* Category & Section Headers ("SETUP", "REPORTS") */
 .body-sidebar .section-break,
 .body-sidebar .item-anchor.section-break,
 .body-sidebar .item-anchor.section-break .sidebar-item-label,
@@ -307,40 +309,47 @@ body, [data-theme="light"], .page-container, .main-section {
 }
 
 /* --------------------------------------------------------------------------
-   3. INNER SIDEBAR IN PRINT VIEW & FORM SIDEBAR (HIGH CONTRAST & VISIBILITY)
+   3. PRINT FORMAT BAR (PRINT PREVIEW INNER SIDEBAR)
+   FIXED HIGH-VISIBILITY TEXT, LABELS & CHECKBOXES
    -------------------------------------------------------------------------- */
-/* Inner Sidebar Container in Print Preview & Form layouts */
+/* Print Format Bar Container */
 .print-preview-sidebar,
 .layout-side-section.print-preview-sidebar,
 .page-container[data-page-route="print"] .layout-side-section,
-.layout-side-section,
-.form-sidebar {
+.page-print .layout-side-section,
+.print-format-sidebar {
     background-color: #1e293b !important;
     background: #1e293b !important;
-    border-right: 1px solid #334155 !important;
-    border-left: 1px solid #0f172a !important;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05) !important;
+    padding: 16px 14px !important;
 }
 
-/* Print Preview Inner Sidebar: Field Labels ("Print Format", "Language", "Letter Head") */
+/* Print Format Field Labels ("Print Format", "Language", "Letter Head") */
 .print-preview-sidebar label,
 .print-preview-sidebar .control-label,
 .print-preview-sidebar .form-label,
 .page-container[data-page-route="print"] .layout-side-section label,
-.page-container[data-page-route="print"] .layout-side-section .control-label {
-    color: #f8fafc !important; /* Crisp pure white */
+.page-container[data-page-route="print"] .layout-side-section .control-label,
+.page-print .layout-side-section label,
+.page-print .layout-side-section .control-label,
+.print-format-sidebar label,
+.print-format-sidebar .control-label {
+    color: #ffffff !important; /* Pure white - 100% crisp visibility */
     font-weight: 700 !important;
     font-size: 13px !important;
     margin-bottom: 6px !important;
     display: block !important;
     letter-spacing: 0.01em !important;
+    opacity: 1 !important;
 }
 
-/* Print Preview Input Controls (dropdowns, inputs) */
+/* Dropdown Inputs inside Print Format Bar */
 .print-preview-sidebar .form-control,
-.print-preview-sidebar input,
+.print-preview-sidebar input:not([type="checkbox"]),
 .print-preview-sidebar select,
-.page-container[data-page-route="print"] .layout-side-section .form-control {
+.page-container[data-page-route="print"] .layout-side-section .form-control,
+.page-container[data-page-route="print"] .layout-side-section input:not([type="checkbox"]),
+.page-print .layout-side-section .form-control,
+.print-format-sidebar .form-control {
     background-color: #ffffff !important;
     border: 1.5px solid #cbd5e1 !important;
     color: #0f172a !important;
@@ -357,9 +366,10 @@ body, [data-theme="light"], .page-container, .main-section {
     box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.25) !important;
 }
 
-/* Print Preview Checkbox Settings ("Compact Item Print", "Print UOM after Quantity", etc.) */
+/* Print Checkbox Settings ("Compact Item Print", "Print UOM after Quantity", etc.) */
 .print-preview-sidebar .dynamic-settings,
-.page-container[data-page-route="print"] .dynamic-settings {
+.page-container[data-page-route="print"] .dynamic-settings,
+.page-print .layout-side-section .dynamic-settings {
     border-top: 1px solid #334155 !important;
     padding-top: 14px !important;
     margin-top: 14px !important;
@@ -368,26 +378,42 @@ body, [data-theme="light"], .page-container, .main-section {
 .print-preview-sidebar .checkbox,
 .print-preview-sidebar [data-fieldtype="Check"],
 .page-container[data-page-route="print"] .checkbox,
-.page-container[data-page-route="print"] [data-fieldtype="Check"] {
+.page-container[data-page-route="print"] [data-fieldtype="Check"],
+.page-print .layout-side-section .checkbox,
+.page-print .layout-side-section [data-fieldtype="Check"] {
     margin: 8px 0 !important;
     padding: 4px 0 !important;
 }
 
+/* Checkbox Text Labels: Force pure crisp high-contrast white */
 .print-preview-sidebar .checkbox label,
+.print-preview-sidebar .checkbox .label-area,
 .print-preview-sidebar .label-area,
-.page-container[data-page-route="print"] .checkbox label,
-.page-container[data-page-route="print"] .label-area {
-    color: #f1f5f9 !important; /* Pure white/high-contrast light text */
+.print-preview-sidebar [data-fieldtype="Check"] label,
+.print-preview-sidebar [data-fieldtype="Check"] .label-area,
+.page-container[data-page-route="print"] .layout-side-section .checkbox label,
+.page-container[data-page-route="print"] .layout-side-section .label-area,
+.page-container[data-page-route="print"] .layout-side-section [data-fieldtype="Check"] label,
+.page-container[data-page-route="print"] .layout-side-section [data-fieldtype="Check"] .label-area,
+.page-print .layout-side-section .checkbox label,
+.page-print .layout-side-section .label-area,
+.print-format-sidebar .checkbox label,
+.print-format-sidebar .label-area {
+    color: #ffffff !important; /* Pure white - fixes transparent / washed out look */
     font-size: 13px !important;
     font-weight: 600 !important;
     cursor: pointer !important;
     display: inline-flex !important;
     align-items: center !important;
     gap: 8px !important;
+    opacity: 1 !important;
 }
 
-.print-preview-sidebar .checkbox input[type="checkbox"],
-.page-container[data-page-route="print"] input[type="checkbox"] {
+/* Checkbox Input Elements */
+.print-preview-sidebar input[type="checkbox"],
+.page-container[data-page-route="print"] .layout-side-section input[type="checkbox"],
+.page-print .layout-side-section input[type="checkbox"],
+.print-format-sidebar input[type="checkbox"] {
     accent-color: #0284c7 !important;
     width: 16px !important;
     height: 16px !important;
@@ -395,90 +421,18 @@ body, [data-theme="light"], .page-container, .main-section {
     cursor: pointer !important;
 }
 
-/* Helper text / warning messages in print sidebar */
+/* Helper text / links in print format bar */
 .print-preview-sidebar .form-message,
 .print-preview-sidebar .text-muted,
-.page-container[data-page-route="print"] .text-muted {
-    color: #94a3b8 !important;
+.print-preview-sidebar a,
+.page-container[data-page-route="print"] .layout-side-section .text-muted,
+.page-container[data-page-route="print"] .layout-side-section a {
+    color: #38bdf8 !important;
     font-size: 12px !important;
-}
-
-/* Form Sidebar (Right Column on Form Views: Assign, Attachments, Tags, Share, Metadata) */
-.form-sidebar {
-    padding: 16px 14px !important;
-}
-
-.form-sidebar .form-sidebar-items,
-.form-sidebar .sidebar-section {
-    border-top: 1px solid #334155 !important;
-    padding-top: 12px !important;
-    margin-top: 12px !important;
-}
-
-.form-sidebar .form-sidebar-items:first-child,
-.form-sidebar .sidebar-section:first-child {
-    border-top: none !important;
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-}
-
-.form-sidebar .title,
-.form-sidebar .document-name,
-.form-sidebar h6,
-.form-sidebar .h6 {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    font-size: 14px !important;
-}
-
-.form-sidebar a,
-.form-sidebar .sidebar-item-label,
-.form-sidebar .form-sidebar-item {
-    color: #f1f5f9 !important;
-    font-weight: 600 !important;
-    font-size: 13px !important;
-    transition: color 0.15s ease !important;
-}
-
-.form-sidebar a:hover,
-.form-sidebar .form-sidebar-item:hover {
-    color: #38bdf8 !important;
-}
-
-.form-sidebar svg,
-.form-sidebar .icon {
-    color: #38bdf8 !important;
-    stroke: #38bdf8 !important;
-}
-
-.form-sidebar .text-muted,
-.form-sidebar .created-by,
-.form-sidebar .modified-by {
-    color: #94a3b8 !important;
-    font-size: 12px !important;
-}
-
-.form-sidebar .created-by strong,
-.form-sidebar .modified-by strong {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-}
-
-.form-sidebar .attachment-row {
-    background-color: #334155 !important;
-    border-radius: 6px !important;
-    padding: 6px 10px !important;
-    margin: 6px 0 !important;
-    color: #f1f5f9 !important;
-}
-
-.form-sidebar .attachment-row a {
-    color: #38bdf8 !important;
-    font-weight: 600 !important;
 }
 
 /* --------------------------------------------------------------------------
-   4. FORM TABS, ALL SECTIONS & INPUT FIELDS (HIGH CONTRAST & VISIBILITY)
+   4. FORM SECTIONS, TABS & INPUT FIELDS (HIGH CONTRAST & VISIBILITY)
    -------------------------------------------------------------------------- */
 /* Form Tabs Navigation Bar ("Details", "ETR Data", "eTIMS Details", etc.) */
 .form-tabs-list,
