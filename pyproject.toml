@@ -1,0 +1,20 @@
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "tayba_theme"
+authors = [
+    { name = "Tayba Theme", email = "info@example.com"}
+]
+description = "High-Visibility Modern Slate Theme for ERPNext"
+requires-python = ">=3.10"
+readme = "README.md"
+dynamic = ["version"]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/houssen10/tayba-theme"
+
+[tool.bench.frappe-dependencies]
+frappe = ">=15.0.0,<=17.0.0"
