@@ -399,11 +399,21 @@ body, [data-theme="light"], .page-container, .main-section {
 .form-sidebar,
 .layout-side-section .form-sidebar,
 .layout-main .layout-side-section .form-sidebar,
-.form-builder-sidebar {
+.form-builder-container .form-sidebar,
+.form-builder-container .form-controls,
+.form-builder-container .sidebar-container,
+.form-builder-sidebar,
+.page-container[data-page-route*="Customize Form"] .form-sidebar,
+.page-container[data-page-route*="DocType"] .form-sidebar,
+[data-page-route="Form/Customize Form"] .form-sidebar {
     background-color: #1e293b !important;
     background: #1e293b !important;
     color: #f1f5f9 !important;
-    padding: 16px 14px !important;
+    --text-color: #f1f5f9 !important;
+    --text-muted: #94a3b8 !important;
+    --heading-color: #ffffff !important;
+    --fg-color: #0f172a !important;
+    --control-bg: #0f172a !important;
     border-left: 1px solid #334155 !important;
 }
 
@@ -472,17 +482,74 @@ body, [data-theme="light"], .page-container, .main-section {
     stroke: #38bdf8 !important;
 }
 
-/* Checkboxes in Right Sidebar (e.g. "In Filter", "Mandatory", "Unique", "In List View") */
+/* Form Builder Properties Header & Search Box */
+.form-builder-container .header,
+.form-sidebar .header {
+    border-bottom: 1px solid #334155 !important;
+    padding: 8px !important;
+}
+
+.form-builder-container .header input.form-control,
+.form-builder-container .header .search-box input,
+.form-sidebar .header input.form-control {
+    background-color: #0f172a !important;
+    background: #0f172a !important;
+    color: #f1f5f9 !important;
+    border: 1px solid #334155 !important;
+    border-radius: 6px !important;
+    font-size: 12.5px !important;
+}
+
+.form-builder-container .header input.form-control::placeholder,
+.form-sidebar .header input.form-control::placeholder {
+    color: #94a3b8 !important;
+}
+
+.form-builder-container .header .close-btn,
+.form-sidebar .header .close-btn {
+    background: transparent !important;
+    border: none !important;
+    color: #cbd5e1 !important;
+}
+
+.form-builder-container .header .close-btn svg,
+.form-builder-container .header .close-btn use {
+    stroke: #cbd5e1 !important;
+    color: #cbd5e1 !important;
+}
+
+/* Checkboxes in Right Sidebar (e.g. "In Filter", "Mandatory", "Unique", "In List View", "Print Hide") */
 .form-sidebar .checkbox,
 .form-sidebar .checkbox label,
 .form-sidebar .checkbox .label-area,
 .form-sidebar [data-fieldtype="Check"],
 .form-sidebar [data-fieldtype="Check"] label,
 .form-sidebar [data-fieldtype="Check"] .label-area,
+.form-sidebar [data-fieldtype="Check"] span,
+.form-builder-container .checkbox,
+.form-builder-container .checkbox label,
+.form-builder-container .checkbox .label-area,
+.form-builder-container [data-fieldtype="Check"],
+.form-builder-container [data-fieldtype="Check"] label,
+.form-builder-container [data-fieldtype="Check"] .label-area,
+.form-builder-container [data-fieldtype="Check"] span,
+.sidebar-container .checkbox,
+.sidebar-container .checkbox label,
+.sidebar-container .checkbox .label-area,
+.sidebar-container [data-fieldtype="Check"],
+.sidebar-container [data-fieldtype="Check"] label,
+.sidebar-container [data-fieldtype="Check"] .label-area,
+.sidebar-container [data-fieldtype="Check"] span,
+.control-data .field .checkbox,
+.control-data .field .checkbox label,
+.control-data .field .checkbox .label-area,
+.control-data .field [data-fieldtype="Check"] label,
+.control-data .field [data-fieldtype="Check"] .label-area,
+.control-data .field [data-fieldtype="Check"] span,
 .form-builder-sidebar .checkbox,
 .form-builder-sidebar .checkbox label,
 .form-builder-sidebar .checkbox .label-area {
-    color: #f1f5f9 !important; /* Pure high-contrast white */
+    color: #f1f5f9 !important; /* Pure high-contrast white - 100% visible */
     font-size: 13px !important;
     font-weight: 600 !important;
     cursor: pointer !important;
@@ -490,15 +557,50 @@ body, [data-theme="light"], .page-container, .main-section {
     align-items: center !important;
     gap: 8px !important;
     margin-bottom: 6px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .form-sidebar input[type="checkbox"],
+.form-builder-container input[type="checkbox"],
+.sidebar-container input[type="checkbox"],
+.control-data input[type="checkbox"],
 .form-builder-sidebar input[type="checkbox"] {
     accent-color: #0284c7 !important;
     width: 16px !important;
     height: 16px !important;
     border-radius: 4px !important;
     cursor: pointer !important;
+    margin-right: 6px !important;
+}
+
+/* Descriptions & Help Text under fields (e.g. "If unchecked...", "Don't encode HTML tags...") */
+.form-sidebar .description,
+.form-sidebar .help-box,
+.form-sidebar .help-block,
+.form-sidebar .text-muted,
+.form-sidebar .time-zone,
+.form-builder-container .form-sidebar .description,
+.form-builder-container .form-sidebar .help-box,
+.form-builder-container .form-sidebar .help-block,
+.form-builder-container .form-sidebar .text-muted,
+.form-builder-container .form-sidebar .time-zone,
+.sidebar-container .description,
+.sidebar-container .help-box,
+.sidebar-container .help-block,
+.sidebar-container .text-muted,
+.sidebar-container .time-zone,
+.control-data .field .description,
+.control-data .field .time-zone,
+.control-data .field .text-muted,
+.form-builder-sidebar .description {
+    color: #94a3b8 !important; /* Clean, highly visible light slate */
+    font-size: 11.5px !important;
+    line-height: 1.4 !important;
+    margin-top: 4px !important;
+    margin-bottom: 8px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 /* Action Buttons in Right Sidebar ("Expand", "Collapse", "Add", etc.) */
@@ -507,6 +609,21 @@ body, [data-theme="light"], .page-container, .main-section {
 .form-sidebar .btn-secondary,
 .form-sidebar .btn-xs,
 .form-sidebar button,
+.form-builder-container .form-sidebar .btn,
+.form-builder-container .form-sidebar .btn-default,
+.form-builder-container .form-sidebar .btn-secondary,
+.form-builder-container .form-sidebar .btn-xs,
+.form-builder-container .form-sidebar button,
+.sidebar-container .btn,
+.sidebar-container .btn-default,
+.sidebar-container .btn-secondary,
+.sidebar-container .btn-xs,
+.sidebar-container button,
+.control-data .btn,
+.control-data .btn-default,
+.control-data .btn-secondary,
+.control-data .btn-xs,
+.control-data button,
 .form-builder-sidebar .btn,
 .form-builder-sidebar .btn-default,
 .form-builder-sidebar .btn-secondary,
@@ -528,6 +645,12 @@ body, [data-theme="light"], .page-container, .main-section {
 
 .form-sidebar .btn:hover,
 .form-sidebar button:hover,
+.form-builder-container .form-sidebar .btn:hover,
+.form-builder-container .form-sidebar button:hover,
+.sidebar-container .btn:hover,
+.sidebar-container button:hover,
+.control-data .btn:hover,
+.control-data button:hover,
 .form-builder-sidebar .btn:hover,
 .form-builder-sidebar button:hover {
     background-color: #0284c7 !important;
@@ -544,7 +667,32 @@ body, [data-theme="light"], .page-container, .main-section {
 .form-sidebar .control-input,
 .form-sidebar .frappe-control textarea,
 .form-sidebar .ace_editor,
+.form-sidebar .ace_gutter,
 .form-sidebar .ace_content,
+.form-builder-container .form-sidebar input:not([type="checkbox"]):not([type="radio"]),
+.form-builder-container .form-sidebar select,
+.form-builder-container .form-sidebar textarea,
+.form-builder-container .form-sidebar .form-control,
+.form-builder-container .form-sidebar .field .editable input:not([type="checkbox"]),
+.form-builder-container .form-sidebar .field .editable textarea,
+.form-builder-container .form-sidebar .field .editable select,
+.form-builder-container .form-sidebar .field .editable .ace_editor,
+.form-builder-container .form-sidebar .field .editable .ace_gutter,
+.form-builder-container .form-sidebar .field .editable .ace_content,
+.sidebar-container input:not([type="checkbox"]):not([type="radio"]),
+.sidebar-container select,
+.sidebar-container textarea,
+.sidebar-container .form-control,
+.sidebar-container .ace_editor,
+.sidebar-container .ace_gutter,
+.sidebar-container .ace_content,
+.control-data .field input:not([type="checkbox"]):not([type="radio"]),
+.control-data .field select,
+.control-data .field textarea,
+.control-data .field .form-control,
+.control-data .field .ace_editor,
+.control-data .field .ace_gutter,
+.control-data .field .ace_content,
 .form-builder-sidebar .form-control,
 .form-builder-sidebar input:not([type="checkbox"]):not([type="radio"]),
 .form-builder-sidebar select,
@@ -556,14 +704,20 @@ body, [data-theme="light"], .page-container, .main-section {
     background: #0f172a !important;
     color: #f1f5f9 !important;
     border: 1px solid #334155 !important;
-    border-radius: 8px !important;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+    border-radius: 6px !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25) !important;
 }
 
 .form-sidebar .form-control:focus,
 .form-sidebar textarea:focus,
 .form-sidebar input:focus,
 .form-sidebar select:focus,
+.form-builder-container .form-sidebar input:focus,
+.form-builder-container .form-sidebar select:focus,
+.form-builder-container .form-sidebar textarea:focus,
+.sidebar-container input:focus,
+.sidebar-container textarea:focus,
+.sidebar-container .ace_editor.ace_focus,
 .form-builder-sidebar .form-control:focus,
 .form-builder-sidebar textarea:focus,
 .form-builder-sidebar input:focus {
@@ -571,16 +725,65 @@ body, [data-theme="light"], .page-container, .main-section {
     color: #ffffff !important;
     border-color: #38bdf8 !important;
     box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2) !important;
+    outline: none !important;
 }
 
+/* Ace Editor specifics in right sidebar */
+.form-sidebar .ace_gutter,
+.form-builder-container .ace_gutter,
+.sidebar-container .ace_gutter,
+.control-data .ace_gutter {
+    background-color: #0b1120 !important;
+    color: #64748b !important;
+    border-right: 1px solid #334155 !important;
+}
+
+.form-sidebar .ace_gutter-cell,
+.form-builder-container .ace_gutter-cell,
+.sidebar-container .ace_gutter-cell,
+.control-data .ace_gutter-cell {
+    color: #64748b !important;
+}
+
+.form-sidebar .ace_text-layer,
+.form-sidebar .ace_line,
+.form-builder-container .ace_text-layer,
+.form-builder-container .ace_line,
+.sidebar-container .ace_text-layer,
+.sidebar-container .ace_line,
+.control-data .ace_text-layer,
+.control-data .ace_line {
+    color: #f1f5f9 !important;
+}
+
+/* Field Control Labels (Account Name, Fieldname, Type, Options, etc.) */
 .form-sidebar .control-label,
-.form-sidebar label,
+.form-sidebar .label,
+.form-sidebar label:not(.checkbox label),
+.form-builder-container .form-sidebar .control-label,
+.form-builder-container .form-sidebar .label,
+.form-builder-container .form-sidebar label:not(.checkbox label),
+.sidebar-container .control-label,
+.sidebar-container .label,
+.sidebar-container label:not(.checkbox label),
+.control-data .field .control-label,
+.control-data .field .label,
 .form-builder-sidebar .control-label,
-.form-builder-sidebar label {
+.form-builder-sidebar label:not(.checkbox label) {
     color: #cbd5e1 !important; /* Soft silver label text */
     font-size: 12px !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     margin-bottom: 4px !important;
+    display: block !important;
+    letter-spacing: 0.01em !important;
+}
+
+/* Required Asterisk */
+.form-sidebar .reqd,
+.form-builder-container .reqd,
+.sidebar-container .reqd,
+.control-data .reqd {
+    color: #f87171 !important; /* Vibrant coral red asterisk */
 }
 
 /* Attachment Pill ("INV039434.pdf") */
@@ -848,8 +1051,11 @@ label > span.reqd,
     font-weight: 800 !important;
 }
 
-/* Form Inputs & Select Controls */
-.frappe-control .form-control {
+/* Form Inputs & Select Controls (Main Form Canvas Only) */
+.form-main .frappe-control .form-control,
+.form-container .form-main .form-control,
+.form-page:not(.form-sidebar) .frappe-control:not(.form-sidebar .frappe-control):not(.sidebar-container .frappe-control) .form-control,
+.layout-main:not(.layout-side-section) .frappe-control .form-control {
     background-color: #ffffff !important;
     border: 1px solid #cbd5e1 !important;
     border-radius: 8px !important;
@@ -859,14 +1065,18 @@ label > span.reqd,
     transition: all 0.15s ease !important;
 }
 
-.frappe-control .form-control:focus {
+.form-main .frappe-control .form-control:focus,
+.form-container .form-main .form-control:focus,
+.layout-main:not(.layout-side-section) .frappe-control .form-control:focus {
     border-color: #0284c7 !important;
     box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important;
 }
 
-/* Read-only / static fields (e.g. Supplier, Posting Date, Posting Time in View mode) */
-.frappe-control .control-value,
-.frappe-control .like-disabled-input {
+/* Read-only / static fields (Main Form Canvas Only) */
+.form-main .frappe-control .control-value,
+.form-main .frappe-control .like-disabled-input,
+.form-page:not(.form-sidebar) .frappe-control:not(.form-sidebar .frappe-control):not(.sidebar-container .frappe-control) .control-value,
+.form-page:not(.form-sidebar) .frappe-control:not(.form-sidebar .frappe-control):not(.sidebar-container .frappe-control) .like-disabled-input {
     background-color: #f8fafc !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 8px !important;
@@ -876,10 +1086,13 @@ label > span.reqd,
     padding: 6px 12px !important;
 }
 
-/* Form Checkboxes */
-.frappe-control[data-fieldtype="Check"] label,
-.form-check-label,
-.checkbox label {
+/* Form Checkboxes (Main White Canvas Only - NEVER Inside Any Sidebar) */
+.form-main .frappe-control[data-fieldtype="Check"] label,
+.form-main .form-check-label,
+.form-main .checkbox label,
+.form-container .form-main .checkbox label,
+.form-section .checkbox label,
+.form-page:not(.form-sidebar) .form-section .checkbox label {
     color: #1e293b !important;
     font-weight: 600 !important;
     cursor: pointer !important;
@@ -1090,10 +1303,105 @@ label > span.reqd,
     border-color: #0369a1 !important;
 }
 
-.btn-default {
+.btn-default:not(.form-sidebar .btn):not(.form-builder-container .btn):not(.sidebar-container .btn):not(.control-data .btn) {
     background-color: #ffffff !important;
     border: 1px solid #cbd5e1 !important;
     color: #334155 !important;
     font-weight: 600 !important;
     border-radius: 8px !important;
+}
+
+/* --------------------------------------------------------------------------
+   11. FINAL HARDENED OVERRIDES FOR ALL SIDEBARS (LEFT & RIGHT)
+   Guarantees 100% crisp visibility for all links, checkboxes, labels & text
+   -------------------------------------------------------------------------- */
+/* LEFT SIDEBAR (Desk & Workspace Navigation) */
+.body-sidebar .standard-sidebar-item:not(.selected):not(.active) .sidebar-item-label,
+.body-sidebar .standard-sidebar-item:not(.selected):not(.active) a,
+.body-sidebar .standard-sidebar-item:not(.selected):not(.active) span:not(.sidebar-notification-count):not(.keyboard-shortcut),
+.desk-sidebar .standard-sidebar-item:not(.selected):not(.active) .sidebar-item-label,
+.desk-sidebar .standard-sidebar-item:not(.selected):not(.active) a,
+.desk-sidebar .standard-sidebar-item:not(.selected):not(.active) span:not(.sidebar-notification-count):not(.keyboard-shortcut) {
+    color: #f1f5f9 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.body-sidebar .standard-sidebar-item.selected *,
+.body-sidebar .standard-sidebar-item.active *,
+.desk-sidebar .standard-sidebar-item.selected *,
+.desk-sidebar .standard-sidebar-item.active * {
+    color: #0f172a !important;
+}
+
+.body-sidebar .text-ink-gray-7,
+.desk-sidebar .text-ink-gray-7 {
+    color: #94a3b8 !important;
+}
+
+/* RIGHT SIDEBAR (Form Builder Properties & Form View Sidebar) */
+.form-sidebar .checkbox label,
+.form-sidebar .checkbox .label-area,
+.form-sidebar [data-fieldtype="Check"] label,
+.form-sidebar [data-fieldtype="Check"] .label-area,
+.form-sidebar [data-fieldtype="Check"] span,
+.form-builder-container .checkbox label,
+.form-builder-container .checkbox .label-area,
+.form-builder-container [data-fieldtype="Check"] label,
+.form-builder-container [data-fieldtype="Check"] .label-area,
+.form-builder-container [data-fieldtype="Check"] span,
+.sidebar-container .checkbox label,
+.sidebar-container .checkbox .label-area,
+.sidebar-container [data-fieldtype="Check"] label,
+.sidebar-container [data-fieldtype="Check"] .label-area,
+.sidebar-container [data-fieldtype="Check"] span,
+.control-data .checkbox label,
+.control-data .checkbox .label-area,
+.control-data [data-fieldtype="Check"] label,
+.control-data [data-fieldtype="Check"] .label-area,
+.control-data [data-fieldtype="Check"] span {
+    color: #f1f5f9 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.form-sidebar .description,
+.form-sidebar .help-box,
+.form-sidebar .help-block,
+.form-sidebar .text-muted,
+.form-builder-container .description,
+.form-builder-container .help-box,
+.form-builder-container .help-block,
+.form-builder-container .text-muted,
+.sidebar-container .description,
+.sidebar-container .help-box,
+.sidebar-container .help-block,
+.sidebar-container .text-muted,
+.control-data .description,
+.control-data .text-muted {
+    color: #94a3b8 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.form-sidebar .btn,
+.form-sidebar .btn-default,
+.form-sidebar .btn-xs,
+.form-builder-container .btn,
+.form-builder-container .btn-default,
+.form-builder-container .btn-xs,
+.sidebar-container .btn,
+.sidebar-container .btn-default,
+.sidebar-container .btn-xs,
+.control-data .btn,
+.control-data .btn-default,
+.control-data .btn-xs {
+    background-color: #334155 !important;
+    color: #38bdf8 !important;
+    border: 1px solid #475569 !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
