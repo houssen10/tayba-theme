@@ -37,7 +37,6 @@ body, [data-theme="light"], .page-container, .main-section {
    PRESERVED ORIGINAL LEFT SIDEBAR STYLING - DO NOT ALTER
    -------------------------------------------------------------------------- */
 /* Main Sidebar Container */
-.layout-side-section,
 .desk-sidebar,
 .body-sidebar-container,
 .body-sidebar-container .body-sidebar,
@@ -45,16 +44,29 @@ body, [data-theme="light"], .page-container, .main-section {
     background-color: #1e293b !important;
     background: #1e293b !important;
     border-right: 1px solid #334155 !important;
-    box-shadow: 3px 0 12px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.12) !important;
+    --text-color: #f1f5f9 !important;
+    --text-muted: #94a3b8 !important;
+    --text-light: #cbd5e1 !important;
+    --heading-color: #ffffff !important;
+    color: #f1f5f9 !important;
 }
 
-/* Top Module Header (e.g. "Buying ERPNext") */
+/* Top Module Header (e.g. "Custom / Frappe Framework", "Buying / ERPNext") */
 .body-sidebar .sidebar-header,
 .desk-sidebar .sidebar-header,
 .module-sidebar-nav {
     border-bottom: 1px solid #334155 !important;
-    padding: 8px 10px 12px 10px !important;
-    margin-bottom: 6px !important;
+    padding: 10px 12px 14px 12px !important;
+    margin-bottom: 8px !important;
+}
+
+.body-sidebar .sidebar-header .avatar,
+.desk-sidebar .sidebar-header .avatar {
+    background-color: #334155 !important;
+    color: #ffffff !important;
+    border: 1px solid #475569 !important;
+    font-weight: 700 !important;
 }
 
 .body-sidebar .sidebar-header .header-title,
@@ -75,7 +87,9 @@ body, [data-theme="light"], .page-container, .main-section {
 }
 
 .body-sidebar .sidebar-header .drop-icon svg,
-.body-sidebar .sidebar-header .drop-icon use {
+.body-sidebar .sidebar-header .drop-icon use,
+.desk-sidebar .sidebar-header .drop-icon svg,
+.desk-sidebar .sidebar-header .drop-icon use {
     color: #94a3b8 !important;
     stroke: #94a3b8 !important;
 }
@@ -84,8 +98,8 @@ body, [data-theme="light"], .page-container, .main-section {
 .body-sidebar .standard-items-sections,
 .standard-items-sections {
     border-bottom: 1px solid #334155 !important;
-    padding-bottom: 6px !important;
-    margin-bottom: 6px !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 8px !important;
 }
 
 .body-sidebar .standard-items-sections .item-anchor,
@@ -143,9 +157,11 @@ body, [data-theme="light"], .page-container, .main-section {
 .body-sidebar .standard-sidebar-item a,
 .body-sidebar .standard-sidebar-item span,
 .body-sidebar .sidebar-items a,
+.body-sidebar .sidebar-items span,
 .standard-sidebar-item .item-anchor,
 .standard-sidebar-item .sidebar-item-label,
-.standard-sidebar-item a {
+.standard-sidebar-item a,
+.standard-sidebar-item span {
     color: #f1f5f9 !important; /* Crisp, easily readable light slate/white */
     font-size: 13.5px !important;
     font-weight: 500 !important;
@@ -158,6 +174,8 @@ body, [data-theme="light"], .page-container, .main-section {
 .body-sidebar .standard-sidebar-item svg,
 .body-sidebar .standard-sidebar-item .icon,
 .body-sidebar .text-ink-gray-7,
+.desk-sidebar .sidebar-item-icon svg,
+.desk-sidebar .sidebar-item-icon use,
 .standard-sidebar-item svg,
 .standard-sidebar-item .icon {
     color: #94a3b8 !important;
@@ -165,28 +183,94 @@ body, [data-theme="light"], .page-container, .main-section {
     transition: all 0.15s ease !important;
 }
 
-/* Sidebar Dropdown Chevron (for collapsible categories like "Setup") */
-.body-sidebar .standard-sidebar-item .sidebar-item-control .drop-icon,
-.body-sidebar .drop-icon svg,
-.body-sidebar .drop-icon use {
-    color: #94a3b8 !important;
-    stroke: #94a3b8 !important;
+/* Category & Section Headers ("SETUP", "REPORTS", collapsible groups) - HIGH VISIBILITY FIX */
+.body-sidebar .standard-sidebar-section,
+.body-sidebar .sidebar-section,
+.body-sidebar .sidebar-group,
+.body-sidebar .sidebar-item-container[data-is-group="1"],
+.desk-sidebar .standard-sidebar-section,
+.desk-sidebar .sidebar-section,
+.desk-sidebar .sidebar-group,
+.desk-sidebar .sidebar-item-container[data-is-group="1"] {
+    margin-top: 14px !important;
+    margin-bottom: 4px !important;
 }
 
-/* Category & Section Headers ("SETUP", "REPORTS") */
-.body-sidebar .section-break,
+.body-sidebar .sidebar-section-header,
+.body-sidebar .sidebar-section-title,
+.body-sidebar .standard-sidebar-label,
+.body-sidebar .sidebar-label,
+.body-sidebar .sidebar-group-title,
 .body-sidebar .item-anchor.section-break,
 .body-sidebar .item-anchor.section-break .sidebar-item-label,
-.standard-sidebar-section .sidebar-section-title,
-.standard-sidebar-label,
-.sidebar-section-header,
-.section-break {
-    color: #94a3b8 !important;
-    font-size: 11px !important;
+.body-sidebar [data-is-group="1"] > .standard-sidebar-item .sidebar-item-label,
+.body-sidebar [data-is-group="1"] > .standard-sidebar-item .item-anchor,
+.body-sidebar [data-is-group="1"] > .standard-sidebar-item,
+.desk-sidebar .sidebar-section-header,
+.desk-sidebar .sidebar-section-title,
+.desk-sidebar .standard-sidebar-label,
+.desk-sidebar .sidebar-label,
+.desk-sidebar .sidebar-group-title {
+    color: #94a3b8 !important; /* Clean, highly visible light slate */
+    font-size: 11.5px !important;
     font-weight: 800 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.08em !important;
-    padding-top: 14px !important;
+    padding: 6px 12px !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Sidebar Dropdown Chevron (for collapsible categories like "REPORTS", "Setup") */
+.body-sidebar .standard-sidebar-item .sidebar-item-control .drop-icon,
+.body-sidebar .drop-icon,
+.body-sidebar .drop-icon svg,
+.body-sidebar .drop-icon use,
+.body-sidebar .sidebar-item-control,
+.body-sidebar .sidebar-item-control svg,
+.body-sidebar .sidebar-item-control use,
+.desk-sidebar .drop-icon,
+.desk-sidebar .drop-icon svg,
+.desk-sidebar .drop-icon use,
+.desk-sidebar .sidebar-item-control svg,
+.desk-sidebar .sidebar-item-control use {
+    color: #94a3b8 !important;
+    stroke: #94a3b8 !important;
+    fill: none !important;
+    width: 14px !important;
+    height: 14px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Nested / Child Items under Section Headers (e.g. "Audit System Hooks") */
+.body-sidebar .nested-container,
+.body-sidebar .sidebar-child-item,
+.desk-sidebar .nested-container,
+.desk-sidebar .sidebar-child-item {
+    padding-left: 6px !important;
+    border-left: 1px solid #334155 !important;
+    margin-left: 16px !important;
+    margin-top: 2px !important;
+    margin-bottom: 4px !important;
+}
+
+.body-sidebar .nested-container .standard-sidebar-item .sidebar-item-label,
+.body-sidebar .nested-container .standard-sidebar-item a,
+.body-sidebar .nested-container .standard-sidebar-item span,
+.desk-sidebar .nested-container .standard-sidebar-item .sidebar-item-label,
+.desk-sidebar .nested-container .standard-sidebar-item a,
+.desk-sidebar .nested-container .standard-sidebar-item span {
+    color: #f1f5f9 !important;
+    font-size: 13px !important;
 }
 
 /* Navigation Items (Hover State) */

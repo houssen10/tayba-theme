@@ -1,0 +1,1020 @@
+// ==UserScript==
+// @name         Tayba Modern ERPNext Theme
+// @namespace    https://taybafarms.c.frappe.cloud/
+// @version      5.3
+// @description  High-visibility medium-dark slate sidebar, crisp right sidebar, clean professional table colors, print format bar & form sections
+// @author       Antigravity
+// @match        https://taybafarms.c.frappe.cloud/*
+// @grant        none
+// @run-at       document-start
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    const css = `
+/* ==========================================================================
+   TAYBA MODERN DESK THEME FOR ERPNEXT (v14 / v15 / v16)
+   High-Visibility Medium-Dark Slate Sidebar + High Contrast Typography
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. GLOBAL CANVAS & DESK
+   -------------------------------------------------------------------------- */
+:root,
+[data-theme="light"],
+.body-sidebar-container,
+.body-sidebar {
+    --sidebar-select-color: #334155 !important;
+    --sidebar-hover-color: #334155 !important;
+    --sidebar-active-color: #ffffff !important;
+    --sidebar-border-color: #334155 !important;
+    --surface-menu-bar: #1e293b !important;
+}
+
+body, [data-theme="light"], .page-container, .main-section {
+    background-color: #f8fafc !important; /* Soft modern off-white canvas */
+    color: #0f172a !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif !important;
+}
+
+/* Ensure old/cached smart invoice banner takes zero space */
+#ai_scan_banner {
+    display: none !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. HIGH-VISIBILITY MEDIUM-DARK SLATE SIDEBAR (SLATE-800)
+   PRESERVED ORIGINAL LEFT SIDEBAR STYLING - DO NOT ALTER
+   -------------------------------------------------------------------------- */
+/* Main Sidebar Container */
+.desk-sidebar,
+.body-sidebar-container,
+.body-sidebar-container .body-sidebar,
+.body-sidebar {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    border-right: 1px solid #334155 !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.12) !important;
+    --text-color: #f1f5f9 !important;
+    --text-muted: #94a3b8 !important;
+    --text-light: #cbd5e1 !important;
+    --heading-color: #ffffff !important;
+    color: #f1f5f9 !important;
+}
+
+/* Top Module Header (e.g. "Custom / Frappe Framework", "Buying / ERPNext") */
+.body-sidebar .sidebar-header,
+.desk-sidebar .sidebar-header,
+.module-sidebar-nav {
+    border-bottom: 1px solid #334155 !important;
+    padding: 10px 12px 14px 12px !important;
+    margin-bottom: 8px !important;
+}
+
+.body-sidebar .sidebar-header .avatar,
+.desk-sidebar .sidebar-header .avatar {
+    background-color: #334155 !important;
+    color: #ffffff !important;
+    border: 1px solid #475569 !important;
+    font-weight: 700 !important;
+}
+
+.body-sidebar .sidebar-header .header-title,
+.body-sidebar .header-title,
+.sidebar-header .header-title {
+    color: #ffffff !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.01em !important;
+}
+
+.body-sidebar .sidebar-header .header-subtitle,
+.body-sidebar .header-subtitle,
+.sidebar-header .header-subtitle {
+    color: #94a3b8 !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+.body-sidebar .sidebar-header .drop-icon svg,
+.body-sidebar .sidebar-header .drop-icon use,
+.desk-sidebar .sidebar-header .drop-icon svg,
+.desk-sidebar .sidebar-header .drop-icon use {
+    color: #94a3b8 !important;
+    stroke: #94a3b8 !important;
+}
+
+/* Top Utilities: Search & Notifications in Sidebar */
+.body-sidebar .standard-items-sections,
+.standard-items-sections {
+    border-bottom: 1px solid #334155 !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.body-sidebar .standard-items-sections .item-anchor,
+.body-sidebar .standard-items-sections .sidebar-item-label,
+.body-sidebar .standard-items-sections a,
+.body-sidebar .standard-items-sections span {
+    color: #f1f5f9 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+
+.body-sidebar .standard-items-sections svg,
+.body-sidebar .standard-items-sections use,
+.body-sidebar .standard-items-sections .icon {
+    color: #94a3b8 !important;
+    stroke: #94a3b8 !important;
+}
+
+.body-sidebar .standard-items-sections .standard-sidebar-item:hover {
+    background-color: #334155 !important;
+    border-radius: 8px !important;
+}
+
+.body-sidebar .keyboard-shortcut {
+    background-color: #334155 !important;
+    color: #cbd5e1 !important;
+    border: 1px solid #475569 !important;
+    border-radius: 4px !important;
+    padding: 2px 6px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+}
+
+.body-sidebar .sidebar-notification-count {
+    background-color: #0284c7 !important;
+    color: #ffffff !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    padding: 2px 7px !important;
+}
+
+/* Sidebar Navigation Items - HIGH VISIBILITY TEXT */
+.body-sidebar .standard-sidebar-item,
+.desk-sidebar .standard-sidebar-item,
+.standard-sidebar-item {
+    margin: 2px 6px !important;
+    border-radius: 8px !important;
+    transition: all 0.15s ease !important;
+}
+
+/* Force Crisp High-Contrast White/Silver Text on ALL inactive items */
+.body-sidebar .standard-sidebar-item .item-anchor,
+.body-sidebar .standard-sidebar-item .sidebar-item-label,
+.body-sidebar .standard-sidebar-item a,
+.body-sidebar .standard-sidebar-item span,
+.body-sidebar .sidebar-items a,
+.body-sidebar .sidebar-items span,
+.standard-sidebar-item .item-anchor,
+.standard-sidebar-item .sidebar-item-label,
+.standard-sidebar-item a,
+.standard-sidebar-item span {
+    color: #f1f5f9 !important; /* Crisp, easily readable light slate/white */
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+}
+
+/* Sidebar Item Icons */
+.body-sidebar .standard-sidebar-item .sidebar-item-icon,
+.body-sidebar .standard-sidebar-item .sidebar-item-icon svg,
+.body-sidebar .standard-sidebar-item .sidebar-item-icon use,
+.body-sidebar .standard-sidebar-item svg,
+.body-sidebar .standard-sidebar-item .icon,
+.body-sidebar .text-ink-gray-7,
+.desk-sidebar .sidebar-item-icon svg,
+.desk-sidebar .sidebar-item-icon use,
+.standard-sidebar-item svg,
+.standard-sidebar-item .icon {
+    color: #94a3b8 !important;
+    stroke: #94a3b8 !important;
+    transition: all 0.15s ease !important;
+}
+
+/* Category & Section Headers ("SETUP", "REPORTS", collapsible groups) - HIGH VISIBILITY FIX */
+.body-sidebar .standard-sidebar-section,
+.body-sidebar .sidebar-section,
+.body-sidebar .sidebar-group,
+.body-sidebar .sidebar-item-container[data-is-group="1"],
+.desk-sidebar .standard-sidebar-section,
+.desk-sidebar .sidebar-section,
+.desk-sidebar .sidebar-group,
+.desk-sidebar .sidebar-item-container[data-is-group="1"] {
+    margin-top: 14px !important;
+    margin-bottom: 4px !important;
+}
+
+.body-sidebar .sidebar-section-header,
+.body-sidebar .sidebar-section-title,
+.body-sidebar .standard-sidebar-label,
+.body-sidebar .sidebar-label,
+.body-sidebar .sidebar-group-title,
+.body-sidebar .item-anchor.section-break,
+.body-sidebar .item-anchor.section-break .sidebar-item-label,
+.body-sidebar [data-is-group="1"] > .standard-sidebar-item .sidebar-item-label,
+.body-sidebar [data-is-group="1"] > .standard-sidebar-item .item-anchor,
+.body-sidebar [data-is-group="1"] > .standard-sidebar-item,
+.desk-sidebar .sidebar-section-header,
+.desk-sidebar .sidebar-section-title,
+.desk-sidebar .standard-sidebar-label,
+.desk-sidebar .sidebar-label,
+.desk-sidebar .sidebar-group-title {
+    color: #94a3b8 !important; /* Clean, highly visible light slate */
+    font-size: 11.5px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    padding: 6px 12px !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Sidebar Dropdown Chevron (for collapsible categories like "REPORTS", "Setup") */
+.body-sidebar .standard-sidebar-item .sidebar-item-control .drop-icon,
+.body-sidebar .drop-icon,
+.body-sidebar .drop-icon svg,
+.body-sidebar .drop-icon use,
+.body-sidebar .sidebar-item-control,
+.body-sidebar .sidebar-item-control svg,
+.body-sidebar .sidebar-item-control use,
+.desk-sidebar .drop-icon,
+.desk-sidebar .drop-icon svg,
+.desk-sidebar .drop-icon use,
+.desk-sidebar .sidebar-item-control svg,
+.desk-sidebar .sidebar-item-control use {
+    color: #94a3b8 !important;
+    stroke: #94a3b8 !important;
+    fill: none !important;
+    width: 14px !important;
+    height: 14px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Nested / Child Items under Section Headers (e.g. "Audit System Hooks") */
+.body-sidebar .nested-container,
+.body-sidebar .sidebar-child-item,
+.desk-sidebar .nested-container,
+.desk-sidebar .sidebar-child-item {
+    padding-left: 6px !important;
+    border-left: 1px solid #334155 !important;
+    margin-left: 16px !important;
+    margin-top: 2px !important;
+    margin-bottom: 4px !important;
+}
+
+.body-sidebar .nested-container .standard-sidebar-item .sidebar-item-label,
+.body-sidebar .nested-container .standard-sidebar-item a,
+.body-sidebar .nested-container .standard-sidebar-item span,
+.desk-sidebar .nested-container .standard-sidebar-item .sidebar-item-label,
+.desk-sidebar .nested-container .standard-sidebar-item a,
+.desk-sidebar .nested-container .standard-sidebar-item span {
+    color: #f1f5f9 !important;
+    font-size: 13px !important;
+}
+
+/* Navigation Items (Hover State) */
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):hover,
+.standard-sidebar-item:not(.active-sidebar):not(.selected):hover {
+    background-color: #334155 !important;
+    transform: translateX(2px) !important;
+}
+
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):hover .item-anchor,
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):hover .sidebar-item-label,
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):hover a,
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):hover span,
+.standard-sidebar-item:not(.active-sidebar):not(.selected):hover a {
+    color: #ffffff !important;
+}
+
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):hover .sidebar-item-icon,
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):hover svg,
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):hover use,
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):hover .drop-icon svg {
+    color: #38bdf8 !important;
+    stroke: #38bdf8 !important;
+}
+
+/* ACTIVE / SELECTED ITEM (Crisp White Card Pill) */
+.body-sidebar .standard-sidebar-item.active-sidebar,
+.body-sidebar .standard-sidebar-item.selected,
+.body-sidebar .standard-sidebar-item.active,
+.standard-sidebar-item.active-sidebar,
+.standard-sidebar-item.selected,
+.standard-sidebar-item.active {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.body-sidebar .standard-sidebar-item.active-sidebar .item-anchor,
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-label,
+.body-sidebar .standard-sidebar-item.active-sidebar a,
+.body-sidebar .standard-sidebar-item.active-sidebar span,
+.body-sidebar .standard-sidebar-item.selected .item-anchor,
+.body-sidebar .standard-sidebar-item.selected .sidebar-item-label,
+.body-sidebar .standard-sidebar-item.selected a,
+.body-sidebar .standard-sidebar-item.selected span,
+.standard-sidebar-item.selected a,
+.standard-sidebar-item.selected span {
+    color: #0f172a !important; /* Bold deep slate text on white pill */
+    font-weight: 700 !important;
+}
+
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon,
+.body-sidebar .standard-sidebar-item.active-sidebar svg,
+.body-sidebar .standard-sidebar-item.active-sidebar use,
+.body-sidebar .standard-sidebar-item.selected .sidebar-item-icon,
+.body-sidebar .standard-sidebar-item.selected svg,
+.body-sidebar .standard-sidebar-item.selected use,
+.standard-sidebar-item.selected svg {
+    color: #0284c7 !important; /* Vibrant primary blue icon */
+    stroke: #0284c7 !important;
+}
+
+/* Sidebar Bottom Section ("Getting Started" & User Profile) */
+.body-sidebar .body-sidebar-bottom,
+.desk-sidebar .user-profile-section {
+    border-top: 1px solid #334155 !important;
+    padding-top: 10px !important;
+    margin-top: 8px !important;
+}
+
+.body-sidebar .onboarding-sidebar,
+.body-sidebar .onboarding-sidebar span {
+    color: #e2e8f0 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+
+.body-sidebar .onboarding-sidebar svg,
+.body-sidebar .onboarding-sidebar use {
+    color: #38bdf8 !important;
+    stroke: #38bdf8 !important;
+}
+
+.body-sidebar .onboarding-sidebar:hover span {
+    color: #ffffff !important;
+}
+
+.body-sidebar .dropdown-navbar-user,
+.body-sidebar .sidebar-user-button {
+    border-radius: 8px !important;
+    transition: background-color 0.15s ease !important;
+}
+
+.body-sidebar .dropdown-navbar-user:hover {
+    background-color: #334155 !important;
+}
+
+.body-sidebar .avatar-name-email span:first-child {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+}
+
+.body-sidebar .avatar-name-email .text-secondary {
+    color: #94a3b8 !important;
+    font-size: 11px !important;
+}
+
+.body-sidebar .sidebar-toggle-btn {
+    background-color: #334155 !important;
+    border: 1px solid #475569 !important;
+    color: #ffffff !important;
+}
+
+.body-sidebar .sidebar-toggle-btn svg,
+.body-sidebar .sidebar-toggle-btn use {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. RIGHT SIDEBAR (FORM VIEW: ASSIGN, ATTACHMENTS, TAGS, SHARE, METADATA)
+   CRISP, HIGH-VISIBILITY CONTRAST (FIXES DIM/UNCLEAR RIGHT SIDEBAR)
+   -------------------------------------------------------------------------- */
+.form-sidebar,
+.layout-side-section .form-sidebar,
+.layout-main .layout-side-section .form-sidebar {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    color: #f1f5f9 !important;
+    padding: 16px 14px !important;
+}
+
+/* Document Title & Reference ("Abdiwelli", "INV/26/11/023") */
+.form-sidebar .title,
+.form-sidebar .document-name,
+.form-sidebar .document-label,
+.form-sidebar h6,
+.form-sidebar .h6 {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    display: block !important;
+}
+
+.form-sidebar .text-muted.ellipsis,
+.form-sidebar .document-name,
+.form-sidebar .sub-title {
+    color: #38bdf8 !important; /* Sky blue document reference */
+    font-weight: 600 !important;
+    font-size: 13px !important;
+}
+
+/* Action links ("Assign", "Attachments", "Tags", "Share") */
+.form-sidebar .form-sidebar-items,
+.form-sidebar .sidebar-section {
+    border-top: 1px solid #334155 !important;
+    padding-top: 12px !important;
+    margin-top: 12px !important;
+}
+
+.form-sidebar .form-sidebar-items:first-child,
+.form-sidebar .sidebar-section:first-child {
+    border-top: none !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.form-sidebar a,
+.form-sidebar .sidebar-item-label,
+.form-sidebar .form-sidebar-item,
+.form-sidebar .sidebar-action,
+.form-sidebar .add-assignment,
+.form-sidebar .add-attachment,
+.form-sidebar .add-tag,
+.form-sidebar .add-share {
+    color: #f1f5f9 !important; /* Crisp pure white / slate-50 */
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    transition: color 0.15s ease !important;
+}
+
+.form-sidebar a:hover,
+.form-sidebar .form-sidebar-item:hover,
+.form-sidebar .sidebar-action:hover {
+    color: #38bdf8 !important;
+}
+
+/* Icons & Plus signs in right sidebar */
+.form-sidebar svg,
+.form-sidebar .icon,
+.form-sidebar .sidebar-item-icon,
+.form-sidebar .octicon-plus,
+.form-sidebar .es-icon {
+    color: #38bdf8 !important;
+    stroke: #38bdf8 !important;
+}
+
+/* Attachment Pill ("INV039434.pdf") */
+.form-sidebar .attachment-row,
+.form-sidebar .attachments-list .attachment-row,
+.form-sidebar .form-attachments .attachment-row {
+    background-color: #334155 !important;
+    border: 1px solid #475569 !important;
+    border-radius: 6px !important;
+    padding: 6px 10px !important;
+    margin: 6px 0 !important;
+    color: #f1f5f9 !important;
+}
+
+.form-sidebar .attachment-row a,
+.form-sidebar .attachment-filename {
+    color: #38bdf8 !important;
+    font-weight: 600 !important;
+    font-size: 12.5px !important;
+}
+
+.form-sidebar .attachment-row .close,
+.form-sidebar .attachment-row .remove-btn {
+    color: #94a3b8 !important;
+    opacity: 0.8 !important;
+}
+
+.form-sidebar .attachment-row .close:hover {
+    color: #ef4444 !important;
+}
+
+/* Metadata at bottom ("Last Edited By Tabitha Contracts", "3 hours ago") */
+.form-sidebar .text-muted,
+.form-sidebar .created-by,
+.form-sidebar .modified-by,
+.form-sidebar .comment-count {
+    color: #94a3b8 !important; /* Legible muted slate */
+    font-size: 12px !important;
+}
+
+.form-sidebar .created-by strong,
+.form-sidebar .modified-by strong,
+.form-sidebar .user-name {
+    color: #ffffff !important; /* Crisp white for user names */
+    font-weight: 700 !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. PRINT FORMAT BAR (PRINT PREVIEW INNER SIDEBAR)
+   HIGH-VISIBILITY TEXT, LABELS & CHECKBOXES
+   -------------------------------------------------------------------------- */
+/* Print Format Bar Container */
+.print-preview-sidebar,
+.layout-side-section.print-preview-sidebar,
+.page-container[data-page-route="print"] .layout-side-section,
+.page-print .layout-side-section,
+.print-format-sidebar {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    padding: 16px 14px !important;
+}
+
+/* Print Format Field Labels ("Print Format", "Language", "Letter Head") */
+.print-preview-sidebar label,
+.print-preview-sidebar .control-label,
+.print-preview-sidebar .form-label,
+.page-container[data-page-route="print"] .layout-side-section label,
+.page-container[data-page-route="print"] .layout-side-section .control-label,
+.page-print .layout-side-section label,
+.page-print .layout-side-section .control-label,
+.print-format-sidebar label,
+.print-format-sidebar .control-label {
+    color: #ffffff !important; /* Pure white - 100% crisp visibility */
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    margin-bottom: 6px !important;
+    display: block !important;
+    letter-spacing: 0.01em !important;
+    opacity: 1 !important;
+}
+
+/* Dropdown Inputs inside Print Format Bar */
+.print-preview-sidebar .form-control,
+.print-preview-sidebar input:not([type="checkbox"]),
+.print-preview-sidebar select,
+.page-container[data-page-route="print"] .layout-side-section .form-control,
+.page-container[data-page-route="print"] .layout-side-section input:not([type="checkbox"]),
+.page-print .layout-side-section .form-control,
+.print-format-sidebar .form-control {
+    background-color: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.print-preview-sidebar .form-control:focus,
+.page-container[data-page-route="print"] .layout-side-section .form-control:focus {
+    border-color: #0284c7 !important;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.25) !important;
+}
+
+/* Print Checkbox Settings ("Compact Item Print", "Print UOM after Quantity", etc.) */
+.print-preview-sidebar .dynamic-settings,
+.page-container[data-page-route="print"] .dynamic-settings,
+.page-print .layout-side-section .dynamic-settings {
+    border-top: 1px solid #334155 !important;
+    padding-top: 14px !important;
+    margin-top: 14px !important;
+}
+
+.print-preview-sidebar .checkbox,
+.print-preview-sidebar [data-fieldtype="Check"],
+.page-container[data-page-route="print"] .checkbox,
+.page-container[data-page-route="print"] [data-fieldtype="Check"],
+.page-print .layout-side-section .checkbox,
+.page-print .layout-side-section [data-fieldtype="Check"] {
+    margin: 8px 0 !important;
+    padding: 4px 0 !important;
+}
+
+/* Checkbox Text Labels: Force pure crisp high-contrast white */
+.print-preview-sidebar .checkbox label,
+.print-preview-sidebar .checkbox .label-area,
+.print-preview-sidebar .label-area,
+.print-preview-sidebar [data-fieldtype="Check"] label,
+.print-preview-sidebar [data-fieldtype="Check"] .label-area,
+.page-container[data-page-route="print"] .layout-side-section .checkbox label,
+.page-container[data-page-route="print"] .layout-side-section .label-area,
+.page-container[data-page-route="print"] .layout-side-section [data-fieldtype="Check"] label,
+.page-container[data-page-route="print"] .layout-side-section [data-fieldtype="Check"] .label-area,
+.page-print .layout-side-section .checkbox label,
+.page-print .layout-side-section .label-area,
+.print-format-sidebar .checkbox label,
+.print-format-sidebar .label-area {
+    color: #ffffff !important; /* Pure white - fixes transparent / washed out look */
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    opacity: 1 !important;
+}
+
+/* Checkbox Input Elements */
+.print-preview-sidebar input[type="checkbox"],
+.page-container[data-page-route="print"] .layout-side-section input[type="checkbox"],
+.page-print .layout-side-section input[type="checkbox"],
+.print-format-sidebar input[type="checkbox"] {
+    accent-color: #0284c7 !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+}
+
+/* Helper text / links in print format bar */
+.print-preview-sidebar .form-message,
+.print-preview-sidebar .text-muted,
+.print-preview-sidebar a,
+.page-container[data-page-route="print"] .layout-side-section .text-muted,
+.page-container[data-page-route="print"] .layout-side-section a {
+    color: #38bdf8 !important;
+    font-size: 12px !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. FORM SECTIONS, TABS & INPUT FIELDS (HIGH CONTRAST & VISIBILITY)
+   -------------------------------------------------------------------------- */
+/* Form Tabs Navigation Bar ("Details", "ETR Data", "eTIMS Details", etc.) */
+.form-tabs-list,
+.form-tabs .nav-tabs {
+    border-bottom: 2px solid #e2e8f0 !important;
+    margin-bottom: 20px !important;
+    display: flex !important;
+    gap: 4px !important;
+}
+
+.form-tabs .nav-link {
+    color: #475569 !important;
+    font-weight: 600 !important;
+    font-size: 13.5px !important;
+    padding: 10px 16px !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    background: transparent !important;
+    transition: all 0.15s ease !important;
+}
+
+.form-tabs .nav-link:hover {
+    color: #0284c7 !important;
+    background-color: #f1f5f9 !important;
+    border-radius: 6px 6px 0 0 !important;
+}
+
+.form-tabs .nav-link.active {
+    color: #0284c7 !important;
+    font-weight: 700 !important;
+    border-bottom: 2px solid #0284c7 !important;
+    background: transparent !important;
+}
+
+/* Form Section Breaks & Headers ("Currency and Price List", "Accounting Dimensions", "Items") */
+.form-section {
+    margin-bottom: 24px !important;
+}
+
+.form-section .section-head,
+.section-head,
+.form-section-heading {
+    display: flex !important;
+    align-items: center !important;
+    background-color: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 10px 14px !important;
+    margin: 16px 0 14px 0 !important;
+    color: #0f172a !important;
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+}
+
+.form-section .section-head:hover {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+}
+
+.form-section .section-head .collapse-indicator,
+.form-section .section-head svg {
+    color: #0284c7 !important;
+    stroke: #0284c7 !important;
+    margin-left: auto !important;
+}
+
+/* Non-collapsible section headings (e.g. "Items") */
+.form-section:not(.collapsible) .section-head,
+.form-section-heading {
+    border-left: 4px solid #0284c7 !important;
+    padding-left: 12px !important;
+}
+
+/* Form Labels */
+.form-group label,
+.control-label,
+.frappe-control .control-label {
+    color: #1e293b !important;
+    font-weight: 600 !important;
+    font-size: 12.5px !important;
+    margin-bottom: 4px !important;
+}
+
+/* REQUIRED INDICATOR: Target ONLY the asterisk character, NEVER entire table cells/columns */
+span.reqd,
+label > span.reqd,
+.control-label > span.reqd,
+.grid-heading-row span.reqd {
+    color: #ef4444 !important; /* Red only for the '*' symbol */
+    font-weight: 800 !important;
+}
+
+/* Form Inputs & Select Controls */
+.frappe-control .form-control {
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    color: #0f172a !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    transition: all 0.15s ease !important;
+}
+
+.frappe-control .form-control:focus {
+    border-color: #0284c7 !important;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important;
+}
+
+/* Read-only / static fields (e.g. Supplier, Posting Date, Posting Time in View mode) */
+.frappe-control .control-value,
+.frappe-control .like-disabled-input {
+    background-color: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    color: #0f172a !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    padding: 6px 12px !important;
+}
+
+/* Form Checkboxes */
+.frappe-control[data-fieldtype="Check"] label,
+.form-check-label,
+.checkbox label {
+    color: #1e293b !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. CHILD TABLE / ITEMS GRID (CLEAN PROFESSIONAL STYLING - NO RED NUMBERS)
+   -------------------------------------------------------------------------- */
+/* Child Table Headers (e.g. Items grid in Sales / Purchase Invoice) */
+.grid-heading-row,
+.form-grid .grid-header-row,
+.grid-header {
+    background-color: #f1f5f9 !important;
+    border-bottom: 2px solid #cbd5e1 !important;
+    border-radius: 6px 6px 0 0 !important;
+}
+
+/* Column Header text: Clean bold dark slate (NOT red) */
+.grid-heading-row .grid-static-col,
+.grid-heading-row .grid-static-col.reqd,
+.form-grid .grid-header-row .grid-static-col,
+.form-grid .grid-header-row .grid-static-col.reqd,
+.grid-heading-row .static-area {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.03em !important;
+}
+
+/* Table Row Cells: Clean, sharp dark slate for all values (rates, amounts, quantities) */
+.grid-static-col,
+.grid-static-col.reqd,
+.form-grid .grid-body .grid-row .grid-static-col,
+.form-grid .grid-body .grid-row .grid-static-col.reqd,
+.form-grid .grid-body .grid-row .grid-static-col .field-value,
+.grid-static-col[data-fieldname="rate"],
+.grid-static-col[data-fieldname="amount"],
+.grid-static-col[data-fieldname="custom_billing_rate"],
+.grid-static-col[data-fieldname="qty"],
+.grid-static-col[data-fieldname="custom_actual_kg"],
+.grid-static-col[data-fieldname="custom_pieces"] {
+    color: #0f172a !important; /* Professional deep slate replaces the jarring red text */
+    font-weight: 600 !important;
+}
+
+/* Highlight rates & amounts with high-contrast, professional deep slate */
+.grid-static-col[data-fieldname="rate"] .field-value,
+.grid-static-col[data-fieldname="amount"] .field-value,
+.grid-static-col[data-fieldname="rate"],
+.grid-static-col[data-fieldname="amount"] {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+/* Row hover effect */
+.form-grid .grid-body .grid-row:hover {
+    background-color: #f8fafc !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. TOP NAVBAR
+   -------------------------------------------------------------------------- */
+.navbar.navbar-default,
+.navbar {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02) !important;
+}
+
+.navbar .search-bar {
+    background-color: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 10px !important;
+    transition: all 0.2s ease !important;
+}
+
+.navbar .search-bar:focus-within {
+    background-color: #ffffff !important;
+    border-color: #0284c7 !important;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. PAGE HEADERS & BREADCRUMBS
+   -------------------------------------------------------------------------- */
+.page-head {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    padding: 14px 24px !important;
+}
+
+.page-head .title-text,
+.page-title .title-text {
+    color: #0f172a !important;
+    font-size: 1.25rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.025em !important;
+}
+
+.breadcrumbs,
+.breadcrumb-item a {
+    color: #64748b !important;
+    font-size: 12.5px !important;
+    font-weight: 500 !important;
+}
+
+.breadcrumb-item a:hover {
+    color: #0284c7 !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. WORKSPACE CARDS, CHARTS & METRICS
+   -------------------------------------------------------------------------- */
+.dashboard-widget-box,
+.new-chart-widget {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02) !important;
+    padding: 20px !important;
+    margin-bottom: 24px !important;
+}
+
+.widget-title {
+    color: #0f172a !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}
+
+.number-widget-box,
+.new-number-card-widget {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+    padding: 18px 20px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.number-widget-box:hover,
+.new-number-card-widget:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.08) !important;
+    border-color: #cbd5e1 !important;
+}
+
+.widget-number,
+.number-widget-box .number,
+.new-number-card-widget .widget-number {
+    color: #0f172a !important;
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+}
+
+.widget-subtitle {
+    color: #64748b !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+.links-widget-box,
+.shortcut-widget-box {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+    padding: 18px 20px !important;
+    transition: all 0.2s ease !important;
+}
+
+.links-widget-box:hover {
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.06) !important;
+}
+
+.link-item,
+.links-widget-box a {
+    color: #334155 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    padding: 6px 8px !important;
+    border-radius: 6px !important;
+    transition: all 0.15s ease !important;
+}
+
+.link-item:hover,
+.links-widget-box a:hover {
+    background-color: #f1f5f9 !important;
+    color: #0284c7 !important;
+    transform: translateX(2px) !important;
+}
+
+/* --------------------------------------------------------------------------
+   10. BUTTONS & UI CONTROLS
+   -------------------------------------------------------------------------- */
+.btn-primary {
+    background-color: #0284c7 !important;
+    border-color: #0284c7 !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3) !important;
+}
+
+.btn-primary:hover {
+    background-color: #0369a1 !important;
+    border-color: #0369a1 !important;
+}
+
+.btn-default {
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #334155 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+}
+
+    `;
+
+    function applyTheme() {
+        let existing = document.getElementById('tayba-custom-theme');
+        if (existing) existing.remove();
+        const style = document.createElement('style');
+        style.id = 'tayba-custom-theme';
+        style.type = 'text/css';
+        style.appendChild(document.createTextNode(css));
+        document.head.appendChild(style);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyTheme);
+    } else {
+        applyTheme();
+    }
+})();
